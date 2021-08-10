@@ -1,0 +1,7 @@
+# github.com/gogo/protobuf v1.3.2
+github.com/gogo/protobuf/proto
+# gopkg.in/inf.v0 v0.9.1
+gopkg.in/inf.v0
+# k8s.io/apimachinery v0.21.1
+## explicit
+k8s.io/apimachinery/pkg/api/resource
