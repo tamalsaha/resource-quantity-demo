@@ -2,10 +2,38 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
+	"log"
+
+	v1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/resource"
+	"sigs.k8s.io/yaml"
 )
 
 func main() {
+	var rr v1.ResourceList
+	fmt.Println(rr.Cpu())
+
+	var val interface{} = "abc"
+	fmt.Println(val.(map[string]interface{}))
+	for k, v := range val.(map[string]interface{}) {
+		fmt.Println(k, v)
+	}
+}
+
+func main_() {
+	data, err := ioutil.ReadFile("/home/tamal/go/src/kmodules.xyz/resource-size/testdata/apps/v1/statefulset.yaml")
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	var obj map[string]interface{}
+	err = yaml.Unmarshal(data, &obj)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	fmt.Println(obj)
+
 	q1 := resource.MustParse("100m")
 	fmt.Println(q1, "|", q1.ToUnstructured(), q1.MilliValue())
 	q1_copy := resource.Quantity{Format: resource.DecimalSI}
